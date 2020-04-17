@@ -1,0 +1,16 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+    - name: Verify that jobber is running
+      shell: jobber list
+      changed_when: false
+
+    - name: Verify that the systemd service is enabled
+      shell: systemctl is-active jobber.service
+      changed_when: false
+
+    - name: Assert job is registered
+      shell: 'jobber cat {{ item }}'
+      changed_when: false
+      loop: [roots_job, danis_job]

@@ -1,0 +1,23 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: instance
+    image: geerlingguy/docker-ubuntu1804-ansible
+    command: /lib/systemd/systemd
+    privileged: true
+    pre_build_image: true
+    security_opts: [seccomp=unconfined]
+    volumes: [/sys/fs/cgroup:/sys/fs/cgroup:ro]
+    tmpfs: [/run, /run/lock, /tmp]
+    tty: true
+provisioner:
+  name: ansible
+  inventory:
+    group_vars:
+      all:
+        molecule_no_log: false
+verifier:
+  name: ansible

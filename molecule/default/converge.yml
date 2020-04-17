@@ -1,0 +1,31 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+  - role: ansible-role-users
+    vars:
+      users:
+        - name: dani
+          ssh_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCk1+fISRmfdMlui/dcfUuSCU3JZvBnmXD5eLNsUID8wbiogLUSq/m6sdlsgSLCuG73IMus/W4c8GQO24fvG4msPRoAMZ/gBFRri3OGSD1ypX+2qjbbbrxuZQfeDBOBCthiI82sCVRkVj9zqaiie86s+II9G3iZjs1wDdS0HOxZNBLmlrVsprDEIXhbdg6S/43hlDfw162HuXEnW597TJUVStV0nA/suBb/6sVALqOEAQ66HTjHpG0+gnfPdYmfjJGI9YfnJqWLOtWohQm4ZZRRmwtDiaBaheSFAkByM73VKiRcvk61UeQ+RtrZOq2Rjl94Pu/XW7B7RaF/LoQJz4Mwnc+42SrZ1aM/HFiUpUMKyO5JLgdoGzasRWLRHZVN1yjgepX3UG7EP9FhDUrXBQFPtEDE2E8FvSko7Jek4HHgOPfDnHwa6oyA5W9jmGexLq02AOnmOyJ6QlOjsGzChD7GaJET8B7WDk+hmykgud0p/U4iR5FBvTzrJ3ORAZ8jLHyvEHDzfhJNMJ16mIwBkH+ppWSwxJBL6CfclxUf7TWTt7t/tTgGL0JEyUPs8/e0Wf0zivW4ea9bLDkue0gfPKFSw7xC+XolwoaX5yNIkjZNPdBJm1W9ZM5Ak7gP/xheQLWtYuNGdkCU9WZr1RVArluvsoJC/0hE/dOTtIL2kj8rKQ==
+          passwordless_sudo: true
+          shell: /bin/bash
+
+  tasks:
+    - name: Include ansible-role-jobber
+      include_role:
+        name: ansible-role-jobber
+      vars:
+        jobber_configs:
+          root:
+            version: 1.4
+            jobs:
+              root_job:
+                cmd: echo hello root
+                time: 0 0 12
+
+          dani:
+            version: 1.4
+            jobs:
+              danis_job:
+                cmd: echo hello dani
+                time: 0 0 12
