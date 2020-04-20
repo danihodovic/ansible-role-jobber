@@ -1,0 +1,19 @@
+---
+namespace: danihodovic
+name: jobber
+version: 0.0.1
+readme: README.md
+authors:
+- Dani Hodovic <hodovic.dani@gmail.com>
+description: >-
+  An Ansible role that installs Jobber on debian based architecture.
+  https://dshearer.github.io/jobber
+license:
+- MIT
+license_file: LICENSE
+tags: [jobber, cron,]
+dependencies: {}
+repository: https://github.com/danihodovic/ansible-role-jobber
+documentation:
+homepage: https://dshearer.github.io/jobber
+issues: https://github.com/danihodovic/ansible-role-jobber/issues
