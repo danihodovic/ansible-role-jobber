@@ -1,0 +1,2 @@
+---
+- src: git+https://git@github.com/honeylogic-io/ansible-role-users.git
