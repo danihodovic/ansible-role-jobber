@@ -8,8 +8,7 @@ https://dshearer.github.io/jobber
 Requirements
 ------------
 
-Role Variables
---------------
+- jmespath (`pip install jmespath`) on the controller machine
 
 Example Playbook
 ----------------
@@ -17,7 +16,7 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-    - role: danihodovic.jobber
+    - role: ansible-role-jobber
       vars:
         jobber_configs:
           root:
@@ -26,12 +25,14 @@ Example Playbook
               root_job:
                 cmd: echo hello root
                 time: 0 0 12
-```
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
-      roles:
-         - { role: danihodovic.jobber, x: 42 }
+          dani:
+            version: 1.4
+            jobs:
+              other_job:
+                cmd: echo hello dani
+                time: 0 0 12
+```
 
 License
 -------
