@@ -11,6 +11,10 @@
       changed_when: false
 
     - name: Assert job is registered
-      shell: 'jobber cat {{ item }}'
+      shell: 'sudo -u {{ item.user }} jobber cat {{ item.job }}'
       changed_when: false
-      loop: [roots_job, danis_job]
+      loop:
+        - job: root_job
+          user: root
+        - job: dani_job
+          user: dani

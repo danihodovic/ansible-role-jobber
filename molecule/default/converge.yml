@@ -26,6 +26,6 @@
           dani:
             version: 1.4
             jobs:
-              danis_job:
+              dani_job:
                 cmd: echo hello dani
                 time: 0 0 12
