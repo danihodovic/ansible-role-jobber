@@ -1,4 +1,5 @@
 ---
 - name: Reload jobber
+  become: true
   listen: reload_jobber
   shell: jobber reload -a
