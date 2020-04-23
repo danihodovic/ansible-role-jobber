@@ -1,5 +1,5 @@
 galaxy_info:
-  role_name: danihodovic.jobber
+  role_name: jobber
   author: Dani Hodovic (@danihodovic)
   description: An Ansible role that installs Jobber on debian based architecture.
   company: Depode LTD (https://depode.com)
