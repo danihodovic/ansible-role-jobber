@@ -1,6 +1,7 @@
 ---
 # https://github.com/ansible/ansible/pull/46159
 - name: Install xz-utils
+  become: true
   apt:
     name: xz-utils
     update_cache: true
@@ -29,6 +30,7 @@
     deb: '{{ jobber_deb_download_url }}'
 
 - name: Enable systemd service
+  become: true
   systemd:
     name: jobber.service
     state: started
@@ -36,6 +38,7 @@
 
 - name: Setup jobber configs
   notify: reload_jobber
+  become: true
   copy:
     content: '{{ item.value | to_yaml }}'
     dest: '{{ "/root/.jobber" if item.key == "root" else "/home/"+item.key+"/.jobber" }}'
