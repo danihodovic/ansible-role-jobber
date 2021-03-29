@@ -6,28 +6,26 @@
     name: xz-utils
     update_cache: true
 
-- name: Get latest release
-  uri:
-    url: https://api.github.com/repos/dshearer/jobber/releases/latest
-    timeout: 5
-  register: jobber_latest_release
-  changed_when: false
+- name: Install fetch
+  become: true
+  tags: fetch
+  get_url:
+    url: https://github.com/gruntwork-io/fetch/releases/download/v0.4.1/fetch_linux_amd64
+    dest: /usr/local/bin/fetch
+    mode: 0755
+    force: true
 
-- name: Get download url
-  set_fact:
-    # Why to_json | from_json?
-    # https://github.com/ansible/ansible/issues/27299
-    jobber_deb_download_url: >-
-      {{ jobber_latest_release.json.assets |
-         to_json | from_json |
-         json_query("[?contains(name, 'amd64.deb')].browser_download_url | [0]") |
-         trim
-      }}
+- name: Fetch deb
+  shell: >-
+    fetch --repo
+    https://github.com/dshearer/jobber
+    --release-asset=".*amd64.deb"
+    --tag=v1.4.4 /tmp
 
 - name: Install deb
   become: true
   apt:
-    deb: '{{ jobber_deb_download_url }}'
+    deb: /tmp/jobber_1.4.4-1_amd64.deb
 
 - name: Enable systemd service
   become: true
